@@ -1,0 +1,11 @@
+// include에 ["."]이 설정되어 있다면 디렉토리에 최소한 하나의 ts파일이 있어야 한다. 그렇지 않다면 아래 에러를 보게된다.
+//  No inputs were found in config file '{userpath}/tsconfig.json'.
+//  Specified 'include' paths were '["."]' and 'exclude' paths were '["node_modules"]'.
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    //"outDir": "dist"
+  },
+  "include": ["prettier.config.mjs", "**/*.ts"],
+  "exclude": ["node_modules"]
+}

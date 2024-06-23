@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src"],
+  "include": ["prettier.config.mjs", "src"],
   "exclude": ["node_modules", "dist"]
 }
