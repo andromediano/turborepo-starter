@@ -1,0 +1,21 @@
+{
+  "name": "@repo/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared Tailwindcss config",
+  "exports": {
+    ".": "./tailwind.config.ts",
+    "./postcss.config": "./postcss.config.mjs"
+  },
+  "keywords": [],
+  "author": "andromediano",
+  "license": "ISC",
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^20.14.8",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4"
+  }
+}

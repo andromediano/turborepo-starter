@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["prettier.config.mjs", "src", "turbo"],
+  "include": ["postcss.config.mjs", "prettier.config.mjs", "**/*.ts", "src", "turbo"],
   "exclude": ["node_modules", "dist"]
 }
