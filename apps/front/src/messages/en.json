@@ -1,0 +1,10 @@
+{
+  "HomePage": {
+    "title": "Hello world!!!!"
+  },
+  "Auth": {
+    "signup": "SignUp",
+    "signin": "SignIn",
+    "signout": "SignOut"
+  }
+}

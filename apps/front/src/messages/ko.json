@@ -1,0 +1,10 @@
+{
+  "HomePage": {
+    "title": "안녕 세상아!"
+  },
+  "Auth": {
+    "signup": "회원가입",
+    "signin": "로그인",
+    "signout": "로그아웃"
+  }
+}
