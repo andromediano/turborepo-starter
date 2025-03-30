@@ -8,15 +8,12 @@
  *  - 다국어 처리는 주로 UI 렌더링 단계에서 필요하고, 세션이나 API 호출에 직접 의존하지 않는 경우가 많아
  */
 import { SessionProvider } from "@repo/auth";
-import { NextIntlClientProvider } from "next-intl";
 import { TRPCReactProvider } from "@/trpc/client";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
-      <TRPCReactProvider>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
-      </TRPCReactProvider>
+      <TRPCReactProvider>{children}</TRPCReactProvider>
     </SessionProvider>
   );
 }
