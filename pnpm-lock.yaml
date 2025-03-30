@@ -4,6 +4,12 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    typescript:
+      specifier: ^5.8.2
+      version: 5.8.2
+
 importers:
 
   .:
@@ -60,6 +66,9 @@ importers:
       '@repo/database':
         specifier: workspace:^
         version: link:../../packages/database
+      '@repo/typescript-config':
+        specifier: workspace:^
+        version: link:../../packages/typescript-config
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.0.14
@@ -82,7 +91,7 @@ importers:
         specifier: ^4
         version: 4.0.14
       typescript:
-        specifier: ^5
+        specifier: 'catalog:'
         version: 5.8.2
 
   apps/front:
@@ -130,6 +139,9 @@ importers:
       '@repo/database':
         specifier: workspace:^
         version: link:../../packages/database
+      '@repo/typescript-config':
+        specifier: workspace:^
+        version: link:../../packages/typescript-config
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.0.14
@@ -152,7 +164,7 @@ importers:
         specifier: ^4
         version: 4.0.14
       typescript:
-        specifier: ^5
+        specifier: 'catalog:'
         version: 5.8.2
 
   packages/auth:
@@ -183,7 +195,7 @@ importers:
         specifier: ^5.0.2
         version: 5.0.2
       typescript:
-        specifier: ^5.8.2
+        specifier: 'catalog:'
         version: 5.8.2
 
   packages/database:
@@ -204,6 +216,9 @@ importers:
       prisma:
         specifier: ^6.5.0
         version: 6.5.0(typescript@5.8.2)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.2
 
   packages/eslint-config:
     devDependencies:
@@ -213,6 +228,9 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^15.2.1
         version: 15.2.1
+      '@repo/typescript-config':
+        specifier: workspace:^
+        version: link:../typescript-config
       eslint:
         specifier: ^9.22.0
         version: 9.22.0(jiti@2.4.2)
@@ -235,7 +253,7 @@ importers:
         specifier: ^16.0.0
         version: 16.0.0
       typescript:
-        specifier: ^5.8.2
+        specifier: 'catalog:'
         version: 5.8.2
       typescript-eslint:
         specifier: ^8.26.0
@@ -266,7 +284,7 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       typescript:
-        specifier: ^5.8.2
+        specifier: 'catalog:'
         version: 5.8.2
 
   packages/typescript-config: {}
@@ -302,7 +320,7 @@ importers:
         specifier: ^9.22.0
         version: 9.22.0(jiti@2.4.2)
       typescript:
-        specifier: 5.8.2
+        specifier: 'catalog:'
         version: 5.8.2
 
 packages:
