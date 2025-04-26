@@ -26,6 +26,9 @@ importers:
 
   apps/admin:
     dependencies:
+      '@prisma/client':
+        specifier: ^6.5.0
+        version: 6.5.0(prisma@6.5.0(typescript@5.8.2))(typescript@5.8.2)
       '@repo/auth':
         specifier: workspace:^
         version: link:../../packages/auth
@@ -66,6 +69,12 @@ importers:
       '@repo/database':
         specifier: workspace:^
         version: link:../../packages/database
+      '@repo/eslint-config':
+        specifier: workspace:^
+        version: link:../../packages/eslint-config
+      '@repo/prettier-config':
+        specifier: workspace:^
+        version: link:../../packages/prettier-config
       '@repo/typescript-config':
         specifier: workspace:^
         version: link:../../packages/typescript-config
@@ -96,6 +105,9 @@ importers:
 
   apps/front:
     dependencies:
+      '@prisma/client':
+        specifier: ^6.5.0
+        version: 6.5.0(prisma@6.5.0(typescript@5.8.2))(typescript@5.8.2)
       '@repo/auth':
         specifier: workspace:^
         version: link:../../packages/auth
@@ -139,6 +151,12 @@ importers:
       '@repo/database':
         specifier: workspace:^
         version: link:../../packages/database
+      '@repo/eslint-config':
+        specifier: workspace:^
+        version: link:../../packages/eslint-config
+      '@repo/prettier-config':
+        specifier: workspace:^
+        version: link:../../packages/prettier-config
       '@repo/typescript-config':
         specifier: workspace:^
         version: link:../../packages/typescript-config
