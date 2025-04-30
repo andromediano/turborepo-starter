@@ -37,3 +37,7 @@ yarn-error.log*
 
 # Backup
 *.bak
+
+# Podman
+pod.yaml
+secret.yaml

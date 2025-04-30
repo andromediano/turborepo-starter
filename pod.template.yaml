@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ${PROJECT_NAME}-pod
+  labels:
+    app: ${PROJECT_NAME}
+spec:
+  containers:
+  - name: postgres
+    image: docker.io/library/postgres:latest
+    env:
+    - name: POSTGRES_USER
+      valueFrom:
+        secretKeyRef:
+          name: ${PROJECT_NAME}-secret
+          key: postgres-user
+    - name: POSTGRES_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: ${PROJECT_NAME}-secret
+          key: postgres-password
+    - name: POSTGRES_DB
+      valueFrom:
+        secretKeyRef:
+          name: ${PROJECT_NAME}-secret
+          key: postgres-db
+    ports:
+    - containerPort: 5432
+      hostPort: 5432
+    volumeMounts:
+    - mountPath: /var/lib/postgresql/data
+      name: postgres-data
+  - name: valkey
+    image: valkey/valkey:latest
+    ports:
+      - containerPort: 6379
+    resources:
+      limits:
+        memory: "256Mi"
+        cpu: "500m"
+    volumeMounts:
+      - name: valkey-data
+        mountPath: /data
+  volumes:
+  - name: postgres-data
+    hostPath:
+      path: ${POSTGRES_DATA_PATH}
+      type: Directory
+  - name: valkey-data
+    hostPath:
+      path: ${VALKEY_DATA_PATH}
+      type: DirectoryOrCreate
