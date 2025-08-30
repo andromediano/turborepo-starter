@@ -1,4 +1,5 @@
-@import "tailwindcss";
+@import "@repo/tailwind-config/shared-styles";
+@import "@repo/ui/styles.css";
 
 @theme {
   --font-sans: var(--noto-sans-kr), sans-serif;

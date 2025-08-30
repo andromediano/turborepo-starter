@@ -22,12 +22,11 @@ const signingRoutes = [URI_SIGNIN, URI_SIGNUP];
 
 // next-intl 미들웨어 생성
 const intlMiddleware = createMiddleware(routing);
-const locales = ["en", "ko", "ja"]; // 지원할 언어 목록
 
 async function middleware(request: NextAuthRequest) {
   const { pathname } = request.nextUrl;
   const isAuthenticated = !!request.auth;
-  const pathnameHasLocale = locales.some(
+  const pathnameHasLocale = routing.locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 

@@ -1,35 +1,62 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import eslint from "@eslint/js";
+import nextPlugin from "@next/eslint-plugin-next";
 import tanstackQueryPlugin from "@tanstack/eslint-plugin-query";
 import eslintPluginPrettier from "eslint-plugin-prettier/recommended";
+import importPlugin from "eslint-plugin-import";
+import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  eslintPluginPrettier,
+export default tseslint.config(
   {
-    files: ["**/*.{js,jsx,ts,tsx}"], // 적용 대상 파일 명시
-    plugins: {
-      "@tanstack/query": tanstackQueryPlugin,
+    ignores: [
+      "**/.next/**",
+      "**/dist/**",
+      "**/.turbo/**",
+      "**/node_modules/**",
+    ],
+  },
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    ...reactPlugin.configs.flat.recommended,
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    languageOptions: {
+      ...reactPlugin.configs.flat.recommended.languageOptions,
+      globals: {
+        ...globals.browser,
+        ...globals.es2021,
+      },
     },
-    rules: {
-      ...tanstackQueryPlugin.configs.recommended.rules, // 추천 규칙 적용
+    settings: {
+      react: {
+        version: "detect",
+      },
     },
   },
-  ...compat.config({
-    extends: ["next/core-web-vitals", "next/typescript"],
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    plugins: {
+      "@next/next": nextPlugin,
+      "@tanstack/query": tanstackQueryPlugin,
+      "react-hooks": reactHooksPlugin,
+      "jsx-a11y": jsxA11yPlugin,
+      import: importPlugin,
+    },
     rules: {
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
+      ...tanstackQueryPlugin.configs.recommended.rules,
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+
+      // Rules from old compat config
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
       "react/jsx-props-no-spreading": "off",
       "react/require-default-props": "off",
-      // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/function-component-definition.md
       "react/function-component-definition": [
         "error",
         {
@@ -37,7 +64,6 @@ const eslintConfig = [
           unnamedComponents: "function-expression",
         },
       ],
-      // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/label-has-associated-control.md
       "jsx-a11y/label-has-associated-control": [
         "error",
         {
@@ -63,26 +89,25 @@ const eslintConfig = [
             "unknown",
           ],
           pathGroups: [
-            {
-              pattern: "react",
-              group: "builtin",
-              position: "before",
-            },
-            {
-              pattern: "next/*",
-              group: "builtin",
-              position: "before",
-            },
+            { pattern: "react", group: "builtin", position: "before" },
+            { pattern: "next/*", group: "builtin", position: "before" },
           ],
           pathGroupsExcludedImportTypes: [],
-          alphabetize: {
-            order: "asc",
-          },
+          alphabetize: { order: "asc" },
         },
       ],
       "no-plusplus": "off",
     },
-  }),
-];
-
-export default eslintConfig;
+    settings: {
+      "import/parsers": {
+        "@typescript-eslint/parser": [".ts", ".tsx"],
+      },
+      "import/resolver": {
+        typescript: {
+          alwaysTryTypes: true,
+        },
+      },
+    },
+  },
+  eslintPluginPrettier,
+);

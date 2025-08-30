@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notoSansKr, notoSerifKr } from "@/app/styles/fonts";
+import Layout from "@/components/layout/Layout";
 import { Providers } from "@/utils/Providers";
 import "./styles/globals.css";
 
@@ -14,11 +15,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
-        className={`${notoSansKr.className} ${notoSerifKr.variable} antialiased`}
+        className={`${notoSansKr.className} ${notoSerifKr.variable} antialiased text-slate-950 lg:bg-slate-100 dark:bg-slate-950 dark:text-white`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
       </body>
     </html>
   );

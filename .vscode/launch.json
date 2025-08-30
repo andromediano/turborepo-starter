@@ -14,6 +14,34 @@
       "resolveSourceMapLocations": [
         "!**/node_modules/**"
       ]
+    },
+    {
+      "name": "Next.js(front): debug with Turbo",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "turbo dev --filter=front",
+      "serverReadyAction": {
+        "pattern": "- Local:.+(https?://.+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      },
+      "resolveSourceMapLocations": [
+        "!**/node_modules/**"
+      ]
+    },
+    {
+      "name": "Next.js(admin): debug with Turbo",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "turbo dev --filter=admin",
+      "serverReadyAction": {
+        "pattern": "- Local:.+(https?://.+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      },
+      "resolveSourceMapLocations": [
+        "!**/node_modules/**"
+      ]
     }
   ]
 }

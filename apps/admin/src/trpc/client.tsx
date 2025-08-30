@@ -31,7 +31,7 @@ function getUrl() {
   const base = (() => {
     if (typeof window !== "undefined") return "";
     if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-    return "http://localhost:3000";
+    return "http://localhost:3001";
   })();
   return `${base}/api/trpc`;
 }
@@ -48,9 +48,17 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
         httpBatchLink({
           transformer: SuperJSON, // <-- if you use a data transformer
           url: getUrl(),
+          // headers() {
+          //   const headers = new Headers();
+          //   if (typeof window !== "undefined") {
+          //     const token = localStorage.getItem("token");
+          //     if (token) headers.set("Authorization", `Bearer ${token}`);
+          //   }
+          //   return headers;
+          // },
         }),
       ],
-    })
+    }),
   );
 
   return (

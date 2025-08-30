@@ -22,13 +22,15 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  articles      Article[]
+  comments      ArticleComment[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
 model Account {
   userId            String
   type              String
@@ -82,4 +84,162 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@id([userId, credentialID])
+}
+
+//
+// Base
+//
+model GroupCode {
+  id              String    @id(map: "pk_group_code") @db.VarChar(10)
+  name            String    @db.VarChar(16)
+  enabled         Boolean   @default(false)
+  description     String?   @db.VarChar(200)
+  createdAt       DateTime  @default(now())
+  createdBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  updatedAt       DateTime  @updatedAt
+  updatedBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  codes           Code[]
+}
+
+model Code {
+  id              String    @db.VarChar(12)
+  groupId         String    @db.VarChar(10)
+  name            String    @db.VarChar(32)
+  sortOrder       Int?      @default(0)
+  enabled         Boolean   @default(false)
+  description     String?   @db.VarChar(200)
+  createdAt       DateTime  @default(now())
+  createdBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  updatedAt       DateTime  @updatedAt
+  updatedBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  groupCode       GroupCode @relation(fields: [groupId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_code_1")
+  @@id([id, groupId], map: "pk_code")
+}
+
+model Role {
+  id              String    @id(map: "pk_role") @db.VarChar(30)
+  name            String    @db.VarChar(50)
+  description     String?   @db.VarChar(200)
+  createdAt       DateTime  @default(now())
+  createdBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  updatedAt       DateTime  @updatedAt
+  updatedBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  rolePrivileges        RolePrivilege[]
+  securedResourceRoles  SecuredResourceRole[]
+  //users                   User[]
+}
+
+model Privilege {
+  id              String    @id(map: "pk_privilege") @default(cuid())
+  name            String    @db.VarChar(50)
+  description     String?   @db.VarChar(200)
+  createdAt       DateTime  @default(now())
+  createdBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  updatedAt       DateTime  @updatedAt
+  updatedBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  rolePrivileges  RolePrivilege[]
+}
+
+model RolePrivilege {
+  roleId          String    @db.VarChar(30)
+  privilegeId     String    @db.VarChar(25)
+  role            Role      @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_role_privilege_1")
+  privilege       Privilege @relation(fields: [privilegeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_role_privilege_2")
+  @@id([roleId, privilegeId], map: "pk_role_privilege")
+}
+
+model SecuredResource {
+  id              String    @id(map: "pk_secured_resource") @default(cuid())
+  module          String    @db.VarChar(20)
+  name            String    @db.VarChar(50)
+  pattern         String    @db.VarChar(200)
+  description     String?   @db.VarChar(200)
+  createdAt       DateTime  @default(now())
+  createdBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  updatedAt       DateTime  @updatedAt
+  updatedBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  securedResourceRoles  SecuredResourceRole[]
+}
+
+model SecuredResourceRole {
+  securedResourceId String  @db.VarChar(25)
+  roleId            String  @db.VarChar(30)
+  securedResource           SecuredResource @relation(fields: [securedResourceId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_secured_resource_role_1")
+  role                      Role            @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_secured_resource_role_2")
+  @@id([securedResourceId, roleId], map: "pk_secured_resource_role")
+}
+
+// -----------------------------------------------------------------------------
+// Article
+// -----------------------------------------------------------------------------
+model Board {
+  id              String    @id(map: "pk_board") @db.VarChar(20)
+  name            String    @db.VarChar(100)
+  pageSize        Int       @default(10)
+  blockSize       Int       @default(10)
+  enabled         Boolean   @default(false)
+  useCreate       Boolean   @default(false)
+  useComment      Boolean   @default(false)
+  useReply        Boolean   @default(false)
+  useAttachment   Boolean   @default(false)
+  useSecret       Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  createdBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  updatedAt       DateTime  @updatedAt
+  updatedBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  articles Article[]
+}
+
+model Article {
+  id              String    @id(map: "pk_article") @default(cuid())
+  boardId         String    @db.VarChar(20)
+  userId          String    @db.VarChar(25)
+  subject         String?   @db.VarChar(200)
+  hitCount        Int?      @default(0)
+  opened          Boolean   @default(false)
+  content         Int?      @db.Oid
+  createdAt       DateTime  @default(now())
+  createdBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  updatedAt       DateTime  @updatedAt
+  updatedBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  board           Board     @relation(fields: [boardId],  references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_article_1")
+  user            User      @relation(fields: [userId],   references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_article_2")
+  attachments     ArticleAttachment[]
+  comments        ArticleComment[]
+}
+
+model ArticleAttachment {
+  articleId       String    @db.VarChar(25)
+  attachmentId    String    @db.VarChar(25)
+  type            String?   @db.VarChar(2)
+  article         Article     @relation(fields: [articleId],    references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_article_attachment_1")
+  attachment      Attachment  @relation(fields: [attachmentId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_article_attachment_2")
+  @@id([articleId, attachmentId], map: "pk_article_attachment")
+}
+
+model ArticleComment {
+  id              String    @id(map: "pk_article_comment") @default(cuid())
+  articleId       String    @db.VarChar(25)
+  userId          String    @db.VarChar(25)
+  content         String?   @db.VarChar(1000)
+  createdAt       DateTime  @default(now())
+  createdBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  updatedAt       DateTime  @updatedAt
+  updatedBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  article         Article   @relation(fields: [articleId],  references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_article_comment_1")
+  user            User      @relation(fields: [userId],     references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_article_comment_2")
+}
+
+model Attachment {
+  id              String    @id(map: "pk_attachment") @default(cuid())
+  section         String    @db.VarChar(20)
+  name            String    @db.VarChar(100)
+  extension       String?   @db.VarChar(5)
+  size            BigInt?
+  status          String?   @db.VarChar(2)
+  createdAt       DateTime  @default(now())
+  createdBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  updatedAt       DateTime  @updatedAt
+  updatedBy       String?   @db.VarChar(25) // CUID: 25, UUID: 36
+  articleAttachments  ArticleAttachment[]
 }

@@ -8,5 +8,12 @@
     {
       "mode": "auto"
     }
-  ]
+  ],
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    ".env": ".env*",
+    "next.config.ts": "next-env.d.ts",
+    "package.json": "pnpm*, .node-version, .npmrc",
+    "pod.yaml": "pod.*.yaml, secret.yaml, secret.*.yaml"
+  },
 }

@@ -1,17 +1,9 @@
-import baseConfig from "@repo/eslint-config/next";
-//import { dirname } from "path";
-//import { fileURLToPath } from "url";
-//import { FlatCompat } from "@eslint/eslintrc";
+import baseConfig from "@repo/eslint-config/eslint.config.mjs";
 
-/*
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-*/
-
-const eslintConfig = [baseConfig];
+/** @type {import('eslint').Linter.FlatConfig[]} */
+const eslintConfig = [
+  ...baseConfig,
+  // any project-specific overrides can go here
+];
 
 export default eslintConfig;

@@ -1,0 +1,18 @@
+{
+  "name": "@repo/tailwind-config",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./shared-styles": "./shared-styles.css",
+    "./postcss": "./postcss.config.mjs"
+  },
+  "scripts": {
+    "clean": "git clean -xdf .cache .turbo dist node_modules"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "catalog:tailwindcss4",
+    "postcss": "catalog:tailwindcss4",
+    "tailwindcss": "catalog:tailwindcss4"
+  }
+}

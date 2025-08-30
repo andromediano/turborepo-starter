@@ -6,8 +6,12 @@ metadata:
     app: ${PROJECT_NAME}
 spec:
   containers:
+  #
+  # POSTGRES
+  #
   - name: postgres
     image: docker.io/library/postgres:latest
+    args: ["-p", "15432"]
     env:
     - name: POSTGRES_USER
       valueFrom:
@@ -25,15 +29,18 @@ spec:
           name: ${PROJECT_NAME}-secret
           key: postgres-db
     ports:
-    - containerPort: 5432
-      hostPort: 5432
+    - containerPort: 15432
+      hostPort: 15432
     volumeMounts:
     - mountPath: /var/lib/postgresql/data
       name: postgres-data
+  #
+  # VALKEY
+  #
   - name: valkey
     image: valkey/valkey:latest
     ports:
-      - containerPort: 6379
+      - containerPort: 16379
     resources:
       limits:
         memory: "256Mi"
@@ -41,6 +48,9 @@ spec:
     volumeMounts:
       - name: valkey-data
         mountPath: /data
+  #
+  # VOLUMES
+  #
   volumes:
   - name: postgres-data
     hostPath:

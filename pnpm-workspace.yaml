@@ -3,11 +3,53 @@ packages:
   - packages/*
 
 catalog:
-  typescript: ^5.8.2
+  "@tanstack/react-query": ^5.74.11
+  "@types/node": ^22.15.3
+  pino: ^9.9.0
+  prettier: ^3.6.2
+  superjson: ^2.2.2
+  typescript: 5.9.2
+  zod: ^3.25.45
+
+catalogs:
+  eslint:
+    "@eslint/eslintrc": ^3.3.1
+    "@eslint/js": ^9.34.0
+    eslint: ^9.34.0
+    eslint-config-prettier: ^10.1.8
+    eslint-plugin-import: ^2.32.0
+    eslint-plugin-only-warn: ^1.1.0
+    eslint-plugin-prettier: ^5.5.4
+    eslint-plugin-react: ^7.37.5
+    eslint-plugin-react-hooks: ^5.2.0
+    eslint-plugin-turbo: ^2.5.6
+  next15:
+    "@next/eslint-plugin-next": ^15.5.2
+    eslint-config-next: 15.5.2
+    next: 15.5.2
+  prisma6:
+    "@prisma/client": ^6.15.0
+    "@prisma/config": ^6.15.0
+    prisma: ^6.15.0
+  react19:
+    "@types/react": ^19.1.0
+    "@types/react-dom": ^19.1.0
+    react: ^19.1.0
+    react-dom: ^19.1.0
+  tailwindcss4:
+    "@tailwindcss/postcss": ^4.1.10
+    postcss: ^8.5.6
+    tailwindcss: ^4.1.10
+  trpc11:
+    "@trpc/client": ^11.1.2
+    "@trpc/server": ^11.1.2
+    "@trpc/tanstack-react-query": ^11.1.2
 
 onlyBuiltDependencies:
-  - '@prisma/client'
-  - '@prisma/engines'
+  - "@parcel/watcher"
+  - "@prisma/client"
+  - "@prisma/engines"
+  - "@tailwindcss/oxide"
   - bcrypt
   - core-js-pure
   - esbuild
