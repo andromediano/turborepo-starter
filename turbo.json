@@ -5,7 +5,7 @@
     "build": {
       "dependsOn": ["^build", "db:generate"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "clean": {
       "cache": false
@@ -16,13 +16,21 @@
       "persistent": true
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint"],
+      "outputs": []
+    },
+    "lint:fix": {
+      "dependsOn": ["^lint:fix"],
+      "outputs": []
     },
     "check-types": {
-      "dependsOn": ["^check-types"]
+      "dependsOn": ["^check-types", "db:generate"],
+      "outputs": []
     },
     "db:generate": {
-      "cache": false
+      "inputs": ["prisma/schema.prisma"],
+      "outputs": ["node_modules/@prisma/client/**"],
+      "cache": true
     },
     "db:migrate": {
       "cache": false,

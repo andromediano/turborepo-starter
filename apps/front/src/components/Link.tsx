@@ -21,8 +21,7 @@ export const NextLink = ({
     <Link
       ref={ref}
       className={cn(buttonVariants({ className, variant, scale }))}
-      {...props}
-    >
+      {...props}>
       {props.children}
     </Link>
   );

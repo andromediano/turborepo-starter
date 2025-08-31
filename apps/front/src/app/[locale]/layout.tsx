@@ -26,8 +26,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${notoSansKr.className} ${notoSerifKr.variable} antialiased`}
-      >
+        className={`${notoSansKr.className} ${notoSerifKr.variable} antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

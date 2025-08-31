@@ -61,25 +61,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Dialog
           open={sidebarOpen}
           onClose={setSidebarOpen}
-          className="relative z-50 xl:hidden"
-        >
+          className="relative z-50 xl:hidden">
           <DialogBackdrop
             transition
-            className="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"
+            className="data-closed:opacity-0 fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear"
           />
 
           <div className="fixed inset-0 flex">
             <DialogPanel
               transition
-              className="relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full"
-            >
+              className="data-closed:-translate-x-full relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out">
               <TransitionChild>
-                <div className="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out data-closed:opacity-0">
+                <div className="data-closed:opacity-0 absolute left-full top-0 flex w-16 justify-center pt-5 duration-300 ease-in-out">
                   <button
                     type="button"
                     onClick={() => setSidebarOpen(false)}
-                    className="-m-2.5 p-2.5"
-                  >
+                    className="-m-2.5 p-2.5">
                     <span className="sr-only">Close sidebar</span>
                     <XMarkIcon
                       aria-hidden="true"
@@ -112,8 +109,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                   ? "bg-gray-800 text-white"
                                   : "text-gray-400 hover:bg-gray-800 hover:text-white",
                                 "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
-                              )}
-                            >
+                              )}>
                               <item.icon
                                 aria-hidden="true"
                                 className="size-6 shrink-0"
@@ -138,8 +134,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                   ? "bg-gray-800 text-white"
                                   : "text-gray-400 hover:bg-gray-800 hover:text-white",
                                 "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
-                              )}
-                            >
+                              )}>
                               <span className="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
                                 {team.initial}
                               </span>
@@ -152,8 +147,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <li className="-mx-6 mt-auto">
                       <a
                         href="#"
-                        className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-white hover:bg-gray-800"
-                      >
+                        className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-white hover:bg-gray-800">
                         <Image
                           width={44}
                           height={44}
@@ -199,8 +193,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                               ? "bg-gray-800 text-white"
                               : "text-gray-400 hover:bg-gray-800 hover:text-white",
                             "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
-                          )}
-                        >
+                          )}>
                           <item.icon
                             aria-hidden="true"
                             className="size-6 shrink-0"
@@ -225,8 +218,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                               ? "bg-gray-800 text-white"
                               : "text-gray-400 hover:bg-gray-800 hover:text-white",
                             "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
-                          )}
-                        >
+                          )}>
                           <span className="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
                             {team.initial}
                           </span>
@@ -259,12 +251,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         <div className="xl:pl-72">
           {/* Sticky search header */}
-          <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 shadow-xs sm:px-6 lg:px-8">
+          <div className="shadow-xs sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 sm:px-6 lg:px-8">
             <button
               type="button"
               onClick={() => setSidebarOpen(true)}
-              className="-m-2.5 p-2.5 text-white xl:hidden"
-            >
+              className="-m-2.5 p-2.5 text-white xl:hidden">
               <span className="sr-only">Open sidebar</span>
               <Bars3Icon aria-hidden="true" className="size-5" />
             </button>
@@ -276,7 +267,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
-                  className="col-start-1 row-start-1 block size-full bg-transparent pl-8 text-base text-white outline-hidden placeholder:text-gray-500 sm:text-sm/6"
+                  className="outline-hidden col-start-1 row-start-1 block size-full bg-transparent pl-8 text-base text-white placeholder:text-gray-500 sm:text-sm/6"
                 />
                 <MagnifyingGlassIcon
                   aria-hidden="true"
@@ -287,8 +278,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <div className="flex items-center gap-x-4 lg:gap-x-6">
                 <button
                   type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
-                >
+                  className="focus:outline-hidden relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
                   <BellIcon aria-hidden="true" className="size-6" />
@@ -296,7 +286,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                    <MenuButton className="focus:outline-hidden relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
                       <Image
@@ -310,29 +300,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   </div>
                   <MenuItems
                     transition
-                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-                  >
+                    className="focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition">
                     <MenuItem>
                       <Link
                         href="/profiles"
-                        className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                      >
+                        className="data-focus:bg-gray-100 data-focus:outline-hidden block px-4 py-2 text-sm text-gray-700">
                         Your Profile
                       </Link>
                     </MenuItem>
                     <MenuItem>
                       <Link
                         href="/settings"
-                        className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                      >
+                        className="data-focus:bg-gray-100 data-focus:outline-hidden block px-4 py-2 text-sm text-gray-700">
                         Settings
                       </Link>
                     </MenuItem>
                     <MenuItem>
                       <Link
                         href={process.env.NEXT_PUBLIC_URI_SIGNOUT!}
-                        className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                      >
+                        className="data-focus:bg-gray-100 data-focus:outline-hidden block px-4 py-2 text-sm text-gray-700">
                         로그아웃
                       </Link>
                     </MenuItem>

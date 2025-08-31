@@ -17,8 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${notoSansKr.className} ${notoSerifKr.variable} antialiased text-slate-950 lg:bg-slate-100 dark:bg-slate-950 dark:text-white`}
-      >
+        className={`${notoSansKr.className} ${notoSerifKr.variable} text-slate-950 antialiased lg:bg-slate-100 dark:bg-slate-950 dark:text-white`}>
         <Providers>
           <Layout>{children}</Layout>
         </Providers>
