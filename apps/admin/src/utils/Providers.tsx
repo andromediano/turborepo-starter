@@ -7,8 +7,8 @@
  *  - tRPC는 API 호출 시 세션 토큰을 사용할 수 있고, 클라이언트 설정이 로케일에 의존하지 않으니까 중간에 위치
  *  - 다국어 처리는 주로 UI 렌더링 단계에서 필요하고, 세션이나 API 호출에 직접 의존하지 않는 경우가 많아
  */
-import { SessionProvider } from "@repo/auth";
 import { TRPCReactProvider } from "@/trpc/client";
+import { SessionProvider } from "@repo/auth";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

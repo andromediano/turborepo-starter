@@ -1,4 +1,4 @@
-import baseConfig from "@repo/eslint-config/eslint.config.mjs";
+import baseConfig from "@repo/eslint-config/next";
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 const eslintConfig = [

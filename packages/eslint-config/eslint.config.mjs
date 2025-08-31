@@ -80,20 +80,33 @@ export default tseslint.config(
         {
           "newlines-between": "never",
           groups: [
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
+            "builtin", // Node.js 내장 모듈
+            "external", // npm 패키지
+            "internal", // 절대 경로 alias (@/components, ...)
+            //"type", // 타입 import (import type)
+            ["parent", "sibling"], // 상대 경로
             "index",
             "unknown",
           ],
           pathGroups: [
-            { pattern: "react", group: "builtin", position: "before" },
-            { pattern: "next/*", group: "builtin", position: "before" },
+            //{ pattern: "react", group: "builtin", position: "before" },
+            //{ pattern: "next/*", group: "builtin", position: "before" },
+            // react, next 관련 모듈을 external 그룹보다 위로 올립니다.
+            {
+              pattern: "{react,react-dom/**,react-router-dom}",
+              group: "external",
+              position: "before",
+            },
+            { pattern: "next/**", group: "external", position: "before" },
+            // @/로 시작하는 내부 모듈 경로를 internal 그룹으로 지정합니다.
+            { pattern: "@/**", group: "internal" },
+            { pattern: "@repo/**", group: "internal" },
           ],
-          pathGroupsExcludedImportTypes: [],
-          alphabetize: { order: "asc" },
+          //pathGroupsExcludedImportTypes: [],
+          pathGroupsExcludedImportTypes: ["react", "next/**"],
+          //alphabetize: { order: "asc" },
+          // 알파벳 순으로 정렬하고, 대소문자를 구분하지 않습니다.
+          alphabetize: { order: "asc", caseInsensitive: true },
         },
       ],
       "no-plusplus": "off",
@@ -105,6 +118,10 @@ export default tseslint.config(
       "import/resolver": {
         typescript: {
           alwaysTryTypes: true,
+          // 모노레포의 각 프로젝트(apps/*, packages/*)에 있는 tsconfig.json 파일을
+          // eslint-plugin-import가 인식하도록 경로를 설정합니다.
+          // 이를 통해 @/ 및 @repo/ 같은 경로 별칭(alias)을 올바르게 해석할 수 있습니다.
+          project: ["apps/*/tsconfig.json", "packages/*/tsconfig.json"],
         },
       },
     },

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth as middleware, match, Session } from "@repo/auth";
 import { getLogger } from "@/lib/logger";
+import { auth as middleware, match, Session } from "@repo/auth";
 
 interface NextAuthRequest extends NextRequest {
   auth: Session | null;

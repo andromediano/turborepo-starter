@@ -21,6 +21,7 @@
     "eslint-config-next": "catalog:next15",
     "eslint-config-prettier": "catalog:eslint",
     "eslint-plugin-import": "catalog:eslint",
+    "eslint-plugin-jsx-a11y": "catalog:eslint",
     "eslint-plugin-only-warn": "catalog:eslint",
     "eslint-plugin-prettier": "catalog:eslint",
     "eslint-plugin-react": "catalog:eslint",

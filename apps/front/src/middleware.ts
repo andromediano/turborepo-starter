@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import createMiddleware from "next-intl/middleware";
-import { auth as authMiddleware, match, Session } from "@repo/auth";
 import { routing } from "@/i18n/routing";
 import { getLogger } from "@/lib/logger";
+import { auth as authMiddleware, match, Session } from "@repo/auth";
 
 interface NextAuthRequest extends NextRequest {
   auth: Session | null;
@@ -27,7 +27,7 @@ async function middleware(request: NextAuthRequest) {
   const { pathname } = request.nextUrl;
   const isAuthenticated = !!request.auth;
   const pathnameHasLocale = routing.locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
   // next-intl 미들웨어를 먼저 실행하여 로케일을 처리

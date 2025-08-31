@@ -13,6 +13,7 @@ import {
   MenuItems,
   TransitionChild,
 } from "@headlessui/react";
+import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import {
   BellIcon,
   CalendarIcon,
@@ -28,7 +29,6 @@ import {
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: false },
@@ -111,7 +111,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                 item.current
                                   ? "bg-gray-800 text-white"
                                   : "text-gray-400 hover:bg-gray-800 hover:text-white",
-                                "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
+                                "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                               )}
                             >
                               <item.icon
@@ -137,7 +137,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                 team.current
                                   ? "bg-gray-800 text-white"
                                   : "text-gray-400 hover:bg-gray-800 hover:text-white",
-                                "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
+                                "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                               )}
                             >
                               <span className="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
@@ -198,7 +198,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                             item.current
                               ? "bg-gray-800 text-white"
                               : "text-gray-400 hover:bg-gray-800 hover:text-white",
-                            "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
+                            "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                           )}
                         >
                           <item.icon
@@ -224,7 +224,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                             team.current
                               ? "bg-gray-800 text-white"
                               : "text-gray-400 hover:bg-gray-800 hover:text-white",
-                            "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
+                            "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                           )}
                         >
                           <span className="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
